@@ -3,8 +3,11 @@ PiCapture
 
 Simple OpenCV wrapper for the Raspberry PI Camera Module
 
-This is Samarth Brahmbatt'code listed on his title:
-Practical OpenCV
+This is based on Samarth Brahmbatt's code listed on his title:
+Practical OpenCV.
+Slightly Modified by George Profenza for a simpler colour callback
+and added camera settings. The setter methods are minimally commented
+to include ranges for the available parameters.
 
 How to use the sample
 =====================
@@ -21,7 +24,7 @@ you just downloaded/cloned.
 Finally, build the demo:
 
 ```
-cd build
+mkdir build && cd build
 cmake ..
 make
 ./main

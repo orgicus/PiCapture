@@ -80,7 +80,7 @@ void PiCapture::open(int _w, int _h, bool _color) {
 		mmal_port_parameter_set(camera->control, &cam_config.hdr);
 	}
 	format = camera_video_port->format;
-    if(color){//not sure how to correctly use this
+    if(color){
         format->encoding = MMAL_ENCODING_RGB24;
         format->encoding_variant = MMAL_ENCODING_RGB24;
     }else{
@@ -93,7 +93,7 @@ void PiCapture::open(int _w, int _h, bool _color) {
 	format->es->video.crop.y = 0;
 	format->es->video.crop.width = width;
 	format->es->video.crop.height = height;
-	format->es->video.frame_rate.num = 30;
+    format->es->video.frame_rate.num = 30;
 	format->es->video.frame_rate.den = 1;
 	camera_video_port->buffer_size = width * height * 3 / 2;
 	camera_video_port->buffer_num = 1;

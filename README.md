@@ -5,7 +5,7 @@ Simple OpenCV wrapper for the Raspberry PI Camera Module
 
 This is based on Samarth Brahmbatt's code listed on his title:
 Practical OpenCV.
-Slightly Modified by George Profenza for a simpler colour callback
+Modified by George Profenza for a simpler/faster colour callback
 and added camera settings. The setter methods are minimally commented
 to include ranges for the available parameters.
 
@@ -34,10 +34,13 @@ Pass any command line argument to main and it will start in colour
 
 Note
 ====
-For the BGR24 encoding mode make sure you have updated your Pi to the latest version
+For the BGR encoding mode make sure you have updated your Pi to the latest version
 ```
 sudo rpi-update
 ```
+The color mode has been tested with firmware 3.10.36+ #665
+and the conversion is on the GPU in this case.
+
 If for some reason you don't want to update, you can use this color callback:
 ```
 static void color_callback(MMAL_PORT_T *port, MMAL_BUFFER_HEADER_T *buffer) {
@@ -68,10 +71,10 @@ static void color_callback(MMAL_PORT_T *port, MMAL_BUFFER_HEADER_T *buffer) {
 	PiCapture::set_image(image);
 }
 ```
-and you need to make sure you are using YUV encoding in the constructor (I420 instead of BGR24) 
+and you need to make sure you are using YUV encoding in the constructor (I420 instead of RGB24) 
 ```
 		format->encoding = MMAL_ENCODING_I420;
 		format->encoding_variant = MMAL_ENCODING_I420;
 
 ```
-This would be a wee bit slower, but will work on older firmware
+This would be a wee bit slower as the conversion is done on the CPU, but will work on older firmware

@@ -18,24 +18,18 @@ void onEffect(int, void* ){
 }
 int main(int argc,char **argv) {
     bool isColor = argc >= 2;
-	namedWindow("Hello");
+    namedWindow("PiCapture");
     cap.open(320, 240, isColor ? true : false);
 	Mat im;
 	double time = 0;
 	unsigned int frames = 0;
-    createTrackbar("brightness","Hello",&brightness,100,onBrightness);
-    createTrackbar("image effect","Hello",&effect,23,onEffect);
+    createTrackbar("brightness","PiCapture",&brightness,100,onBrightness);
+    createTrackbar("image effect","PiCapture",&effect,23,onEffect);
     while(char(waitKey(1)) != 'q') {
 		double t0 = getTickCount();
 		im = cap.grab();
 		frames++;
-        if(!im.empty()) {
-            imshow("Hello", im);
-            if(isColor){
-                cvtColor(im,im,CV_RGB2BGR);
-                imshow("Hey there",im);
-            }
-        }
+        if(!im.empty()) imshow("PiCapture", im);
         else cout << "Frame dropped" << endl;
         time += (getTickCount() - t0) / getTickFrequency();
         cout << frames / time << " fps" << endl;

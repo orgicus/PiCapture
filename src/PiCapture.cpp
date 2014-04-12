@@ -1,5 +1,5 @@
-// OpenCV 2.x C++ wrapper written by Samarth Manoj Brahmbhatt, University of Pennsylvania
 // modified by George Profenza
+// based on the OpenCV 2.x C++ wrapper written by Samarth Manoj Brahmbhatt, University of Pennsylvania
 #include <stdio.h>
 #include <stdlib.h>
 #include <opencv2/opencv.hpp>
@@ -81,8 +81,8 @@ void PiCapture::open(int _w, int _h, bool _color) {
 	}
 	format = camera_video_port->format;
     if(color){//not sure how to correctly use this
-        format->encoding = MMAL_ENCODING_BGR24;
-        format->encoding_variant = MMAL_ENCODING_BGR24;
+        format->encoding = MMAL_ENCODING_RGB24;
+        format->encoding_variant = MMAL_ENCODING_RGB24;
     }else{
         format->encoding = MMAL_ENCODING_I420;
         format->encoding_variant = MMAL_ENCODING_I420;
@@ -104,7 +104,7 @@ void PiCapture::open(int _w, int _h, bool _color) {
 	// create pool form camera video port
 	camera_video_port_pool = (MMAL_POOL_T *) mmal_port_pool_create(camera_video_port,
 	camera_video_port->buffer_num, camera_video_port->buffer_size);
-	if(color) {
+    if(color) {
 		status = mmal_port_enable(camera_video_port, color_callback);
 		if (status != MMAL_SUCCESS)
 			printf("Error: unable to enable camera video port (%u)\n", status);

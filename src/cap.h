@@ -15,7 +15,7 @@ class PiCapture {
 		MMAL_PORT_T *camera_preview_port, *camera_video_port, *camera_still_port;
 		MMAL_PORT_T *preview_input_port;
 		MMAL_CONNECTION_T *camera_preview_connection;
-		bool color;
+        bool color;
 	public:
 		static cv::Mat image;
 		static int width, height;

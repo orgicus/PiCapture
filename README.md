@@ -78,3 +78,5 @@ and you need to make sure you are using YUV encoding in the constructor (I420 in
 
 ```
 This would be a wee bit slower as the conversion is done on the CPU, but will work on older firmware
+
+![PiCapture preview](http://lifesine.eu/rpi/PiCapture.png)
